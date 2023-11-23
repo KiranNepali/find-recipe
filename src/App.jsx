@@ -1,11 +1,14 @@
+import { Category } from "./components/Category";
 import { Pages } from "./pages/Pages";
-
+import { BrowserRouter } from "react-router-dom";
 function App() {
   return (
     <>
-      <div>
-        <h1>Navbar</h1>
-        <Pages />
+      <div className="App">
+        <BrowserRouter>
+          <Category />
+          <Pages />
+        </BrowserRouter>
       </div>
     </>
   );
