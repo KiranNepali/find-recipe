@@ -8,28 +8,63 @@ import React from "react";
 export const Category = () => {
   return (
     <List>
-      <NavLink to={"/cuisine/Italian"}>
+      <Slink to={"/cuisine/Italian"}>
         <FaPizzaSlice />
         <h4>Italian</h4>
-      </NavLink>
-      <NavLink to={"/cuisine/American"}>
+      </Slink>
+      <Slink to={"/cuisine/American"}>
         <FaHamburger />
         <h4>American</h4>
-      </NavLink>
-      <NavLink to={"/cuisine/Thai"}>
+      </Slink>
+      <Slink to={"/cuisine/Thai"}>
         <GiNoodles />
         <h4>Thai</h4>
-      </NavLink>
-      <NavLink to={"/cuisine/Japanese"}>
+      </Slink>
+      <Slink to={"/cuisine/Japanese"}>
         <GiChopsticks />
         <h4>Japanese</h4>
-      </NavLink>
+      </Slink>
     </List>
   );
 };
 
 const List = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
-  margin: 2rem 0;
+  margin: 5rem 0;
+`;
+
+const Slink = styled(NavLink)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 2rem;
+  width: 4rem;
+  height: 4rem;
+  padding: 2px;
+  background: gray;
+  border-radius: 50%;
+  background: #45474b;
+  h4 {
+    font-size: 0.6rem;
+    color: white;
+  }
+  svg {
+    color: white;
+    font-size: 1rem;
+  }
+
+  &.active{
+    background: #F05941;
+    svg {
+      color: white;
+    }
+    h4 {  
+      color: white;
+    }
+
 `;

@@ -7,14 +7,12 @@
 }
 
 body {
-  margin: 0 20%;
+  margin: 2% 20%;
 }
 
 h4 {
   font-size: 1rem;
   color: rgba(56, 56, 56);
-  line-height: 2.5rem;
-  margin: 2rem 0rem;
 }
 h3 {
   font-size: 1.5rem;
