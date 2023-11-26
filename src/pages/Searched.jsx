@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { API_KEY } from "../api/Api";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export const Searched = () => {
   const [searchedRecipe, setSearchedRecipe] = useState([]);
@@ -22,7 +23,12 @@ export const Searched = () => {
   }, [params.search]);
 
   return (
-    <Grid>
+    <Grid
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       {searchedRecipe.map((item) => (
         <Card key={item.id}>
           <Link to={"/recipe/" + item.id}>
@@ -41,7 +47,7 @@ const Grid = styled.div`
   grid-gap: 4rem;
 `;
 
-const Card = styled.div`
+const Card = styled(motion.div)`
   img {
     width: 100%;
     border-radius: 2rem;

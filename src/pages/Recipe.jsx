@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { API_KEY } from "../api/Api";
+import { motion } from "framer-motion";
 
 export const Recipe = () => {
   const [details, setDetails] = useState({});
@@ -22,7 +23,12 @@ export const Recipe = () => {
   console.log(details);
 
   return (
-    <DetailWrapper>
+    <DetailWrapper
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div>
         <h3>{details.title}</h3>
         <img src={details.image} alt="" />
@@ -64,7 +70,7 @@ export const Recipe = () => {
   );
 };
 
-const DetailWrapper = styled.div`
+const DetailWrapper = styled(motion.div)`
   display: flex;
 
   gap: 2vw;
