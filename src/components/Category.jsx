@@ -33,7 +33,8 @@ const List = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin: 5rem 0;
+  margin: 4rem 0;
+  gap: 1rem;
 `;
 
 const Slink = styled(NavLink)`
@@ -42,7 +43,6 @@ const Slink = styled(NavLink)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  margin-right: 2rem;
   width: 4rem;
   height: 4rem;
   padding: 2px;

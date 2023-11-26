@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
+import { API_KEY } from "../api/Api";
+import { Link } from "react-router-dom";
 
 export const Popular = () => {
+  const perPage = window.innerWidth <= 768 ? 1 : 3;
   const [popular, setPopular] = useState([]);
 
   useEffect(() => {
@@ -15,7 +18,6 @@ export const Popular = () => {
     if (check) {
       setPopular(JSON.parse(check)); //change stored string to array
     } else {
-      const API_KEY = "3d9e2a1499e94469914706bcfb4ce0c7";
       const api = await fetch(
         `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=9`
       );
@@ -24,13 +26,14 @@ export const Popular = () => {
       setPopular(data.recipes);
       console.log(data.recipes);
     }
+    console.log(popular);
   };
   return (
     <Wrapper>
       <h3>Popular products</h3>
       <Splide
         options={{
-          perPage: 4,
+          perPage: perPage,
           arrows: false,
           pagination: false,
           drag: "free",
@@ -40,9 +43,11 @@ export const Popular = () => {
         {popular.map((recipe) => (
           <SplideSlide key={recipe.id}>
             <Card>
-              <p key={recipe.id}>{recipe.title}</p>
-              <img src={recipe.image} alt={recipe.image} />
-              <Gradient />
+              <Link to={"/recipe/" + recipe.id}>
+                <p key={recipe.id}>{recipe.title}</p>
+                <img src={recipe.image} alt={recipe.image} />
+                <Gradient />
+              </Link>
             </Card>
           </SplideSlide>
         ))}
@@ -52,7 +57,7 @@ export const Popular = () => {
 };
 
 const Wrapper = styled.div`
-  margin: 4rem rem;
+  margin: 4rem 0;
 `;
 const Card = styled.div`
   min-height: 20rem;

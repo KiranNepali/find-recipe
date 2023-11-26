@@ -5,24 +5,25 @@ import { useState, useEffect } from "react";
 import { API_KEY } from "../api/Api";
 import { Link } from "react-router-dom";
 
-export const Cuisine = () => {
-  const [cuisine, setCuisine] = useState([]);
+export const Searched = () => {
+  const [searchedRecipe, setSearchedRecipe] = useState([]);
   let params = useParams();
 
-  const getCuisine = async (name) => {
+  const getSearched = async (name) => {
     const data = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&cuisine=${name}`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}`
     );
     const recipes = await data.json();
-    setCuisine(recipes.results);
+    setSearchedRecipe(recipes.results);
   };
 
   useEffect(() => {
-    getCuisine(params.type);
-  }, [params.type]);
+    getSearched(params.search);
+  }, [params.search]);
+
   return (
     <Grid>
-      {cuisine.map((item) => (
+      {searchedRecipe.map((item) => (
         <Card key={item.id}>
           <Link to={"/recipe/" + item.id}>
             <img src={item.image} alt="" />

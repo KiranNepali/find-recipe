@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
+import { API_KEY } from "../api/Api";
+import { Link } from "react-router-dom";
 
 export const Veggie = () => {
+  const perPage = window.innerWidth <= 768 ? 1 : 3;
   const [veggie, setVeggie] = useState([]);
 
   useEffect(() => {
@@ -15,7 +18,6 @@ export const Veggie = () => {
     if (check) {
       setVeggie(JSON.parse(check)); //change stored string to array
     } else {
-      const API_KEY = "3d9e2a1499e94469914706bcfb4ce0c7";
       const api = await fetch(
         `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=9&tags=vegetarian`
       );
@@ -30,7 +32,7 @@ export const Veggie = () => {
       <h3>Veggie products</h3>
       <Splide
         options={{
-          perPage: 3,
+          perPage: perPage,
           arrows: false,
           pagination: false,
           drag: "free",
@@ -40,9 +42,11 @@ export const Veggie = () => {
         {veggie.map((recipe) => (
           <SplideSlide key={recipe.id}>
             <Card>
-              <p key={recipe.id}>{recipe.title}</p>
-              <img src={recipe.image} alt={recipe.image} />
-              <Gradient />
+              <Link to={"/recipe/" + recipe.id}>
+                <p key={recipe.id}>{recipe.title}</p>
+                <img src={recipe.image} alt={recipe.image} />
+                <Gradient />
+              </Link>
             </Card>
           </SplideSlide>
         ))}
